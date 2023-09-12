@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using src.Data;
 
@@ -11,9 +12,11 @@ using src.Data;
 namespace src.Migrations
 {
     [DbContext(typeof(Data.AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20230912075556_Removal of UserInfos columns")]
+    partial class RemovalofUserInfoscolumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
