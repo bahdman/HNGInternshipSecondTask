@@ -16,6 +16,7 @@ namespace src.Controllers{
             _service = service;
         }
 
+        // Method to validate string input(name)
         private static bool NameValidator(string nameValue)
         {
             var regEx = @"^[a-zA-Z- ]*$";
@@ -26,30 +27,41 @@ namespace src.Controllers{
             return false;
         }
 
-        
-        [HttpPost]
-        public async Task<IActionResult> AddUser(string name)
+        public class Person
         {
-            if(NameValidator(name))
+            public string Name { get; set; }
+        }
+
+                
+        [HttpPost]
+        public async Task<IActionResult> AddUser([FromBody]  Person personItem)
+        {
+            //Validate the name (Private method defined for this operation is above)
+            if(NameValidator(personItem.Name))
             {
-                var instance = await _service.Create(name);
+                var instance = await _service.Create(personItem.Name);
                 if(instance != null)
                 {
                     return CreatedAtAction(nameof(GetUser), new{name = instance.Name}, instance);
                 }
 
+                // If Person item not created (Db issue) return code => 500
+
                 return StatusCode(500, "Internal server error");
             }
-            
-            return StatusCode(400, "Name is not valid");
-        }
 
-        [HttpGet("{name}")]
-        public async Task<ActionResult<UserInfo>> GetUser(string name)
+            // Status code 400 (client error) => name failed to pass defined string validation
+            
+            return StatusCode(400, $"The name {personItem.Name} is not valid");
+        }
+        
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserInfo>> GetUser(Guid id)
         {
-            if(NameValidator(name))
+            if(id != Guid.Empty)
             {
-                var userInstance = await _service.View(name);
+                var userInstance = await _service.View(id);
                 if(userInstance != null)
                 {
                     return userInstance;
@@ -57,35 +69,38 @@ namespace src.Controllers{
 
                 return NotFound();
             }
+
+            // Status code 400 (client error) => client failed to pass in id             
             
-            
-            return StatusCode(400, "Name is not valid");
+            return StatusCode(400, $"The id: {id} is not valid");
         }
 
-        [HttpPut("{name}")]
-        public async Task<IActionResult> EditUser(string name, UserViewModel viewModel)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditUser(Guid id, UserViewModel viewModel)
         {
-            if(NameValidator(name) && ModelState.IsValid)
+            if(id != Guid.Empty && ModelState.IsValid)
             {
-                var instance = await _service.Update(name, viewModel);
-                if(instance)
+                var isUpdated = await _service.Update(id, viewModel);
+                if(isUpdated)
                 {
                     return NoContent();
                 }
 
                 return NotFound();
             }
+
+            // Status code 400 (client error) => name failed to pass in id
         
-            return StatusCode(400, "Input is not valid");
+            return StatusCode(400, $"The id: {id} is not valid");
         }
 
-        [HttpDelete("{name}")]
-        public async  Task<IActionResult> DeleteUser(string name)
+        [HttpDelete("{id}")]
+        public async  Task<IActionResult> DeleteUser(Guid id)
         {
-            if(NameValidator(name))
+            if(id != Guid.Empty)
             {
-                var instance = await _service.Delete(name);
-                if(instance)
+                var isDeleted = await _service.Delete(id);
+                if(isDeleted)
                 {
                     return NoContent();
                 }
@@ -93,7 +108,9 @@ namespace src.Controllers{
                 return NotFound();
             }
 
-            return StatusCode(400, "Name is not valid");
+            // Status code 400 (client error) => name failed to pass in id
+
+            return StatusCode(400, $"The id: {id} is not valid");
         }
     }
 }

@@ -31,9 +31,9 @@ namespace src.Repositories{
             }
         }
 
-        public async Task<bool> Delete(string name)
+        public async Task<bool> Delete(Guid id)
         {
-            var userInstance = await View(name);
+            var userInstance = await View(id);
             if(userInstance == null)
             {
                 return false;
@@ -52,9 +52,9 @@ namespace src.Repositories{
             }
         }
 
-        public async Task<bool> Update(string name, UserViewModel viewModel)
+        public async Task<bool> Update(Guid id, UserViewModel viewModel)
         {
-            var userInstance = await View(name);
+            var userInstance = await View(id);
             if(userInstance == null)
             {
                 return false;
@@ -73,10 +73,10 @@ namespace src.Repositories{
             }
         }
 
-        public Task<UserInfo> View(string name)
+        public Task<UserInfo> View(Guid id)
         {
             try{
-                var user = _context.UserInfos.Where(m => m.Name == name).FirstOrDefaultAsync();
+                var user = _context.UserInfos.Where(m => m.Id == id).FirstOrDefaultAsync();
                 return user;
             }catch(Exception ex)
             {

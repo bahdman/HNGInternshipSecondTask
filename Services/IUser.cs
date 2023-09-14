@@ -5,8 +5,8 @@ namespace src.Services{
     public interface IUser
     {
         Task<UserInfo> Create(string name);
-        Task<UserInfo> View(string name);
-        Task<bool> Update(string name, UserViewModel viewModel);
-        Task<bool> Delete(string name);
+        Task<UserInfo> View(Guid id);
+        Task<bool> Update(Guid id, UserViewModel viewModel);
+        Task<bool> Delete(Guid id);
     }
 }
