@@ -1,64 +1,186 @@
-### HNGInternshipSecondTask
+# API Documentation
 
-### Project Task => build a simple REST API capable of CRUD operations on a "person" resource, interfacing with any database of your choice.
+**Live URL**: https://bahdman.bsite.net/
 
-**Introduction**:
-- The Task Controller API provides CRUD (Create, Read, Update, Delete) operations for managing user resources.
+## Standard Formats for Requests and Responses
 
-**Tools**:
-- Programming Language : C#
-- Database : Microsoft SQL Server
+### 1. `POST /api/AddUser`
 
-**Base URL**:
-- The base URL for this API is typically `https://bahdman.bsite.net/api/`.
+#### Request Format
 
-**Testing with Postman**
-**Request, response format and usage**
+- **Method**: POST
+- **Endpoint**: `/api/AddUser`
+- **Request Body**:
+  ```json
+  {
+    "Name": "John Doe"
+  }
+  ```
 
-**Endpoints**:
-1. **AddUser (HTTP POST)**:
-   - Endpoint: `/AddUser` e.g https://bahdman.bsite.net/api/AddUser
-   - Method: POST
-   - Payload: Provide a JSON object in the request body with a "name" property.
-   - Example:
-     ```json
-     {
-         "name": "John Doe"
-     }
-     ```
+#### Response Format
 
-2. **GetUser (HTTP GET)**:
-   - Endpoint: `/GetUser/{id}` e.g e.g https://bahdman.bsite.net/api/GetUser/{id}
-   - Method: GET
-   - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to retrieve.
-   - Example:
-     ```
-     https://bahdman.bsite.net/api/GetUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
-     ```
+- **Status Codes**:
+  - `201 Created`: User successfully created.
+  - `400 Bad Request`: Invalid input data or validation failure.
+  - `500 Internal Server Error`: Database issue.
 
-3. **EditUser (HTTP PUT)**:
-   - Endpoint: `/EditUser/{id}` e.g https://bahdman.bsite.net/api/EditUser/{id}
-   - Method: PUT
-   - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to update.
-   - Payload: Provide a JSON object in the request body with the fields you want to update.
-   - Example:
-     ```
-     https://bahdman.bsite.net/api/EditUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
-     Request Body:
-     {
-         "name": "Updated Name"
-     }
-     ```
+- **Response Body (on success)**:
+  ```json
+  {
+    "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+    "Name": "John Doe"
+  }
+  ```
 
-4. **DeleteUser (HTTP DELETE)**:
-   - Endpoint: `/DeleteUser/{id}` e.g https://bahdman.bsite.net/api/DeleteUser/{id}
-   - Method: DELETE
-   - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to delete.
-   - Example:
-     ```
-     https://bahdman.bsite.net/api/DeleteUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
-     ```
+### 2. `GET /api/GetUser/{id}`
 
+#### Request Format
+
+- **Method**: GET
+- **Endpoint**: `/api/GetUser/{id}`
+
+#### Response Format
+
+- **Status Codes**:
+  - `200 OK`: User found.
+  - `400 Bad Request`: Invalid `id`.
+  - `404 Not Found`: User not found.
+
+- **Response Body (on success)**:
+  ```json
+  {
+    "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+    "Name": "John Doe"
+  }
+  ```
+
+### 3. `PUT /api/EditUser/{id}`
+
+#### Request Format
+
+- **Method**: PUT
+- **Endpoint**: `/api/EditUser/{id}`
+- **Request Body**:
+  ```json
+  {
+    "Name": "Updated Name"
+  }
+  ```
+
+#### Response Format
+
+- **Status Codes**:
+  - `200 OK`: User updated successfully.
+  - `400 Bad Request`: Invalid `id` or invalid input data.
+  - `404 Not Found`: User not found.
+
+- **Response Body (on success)**:
+  ```json
+  {
+    "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+    "Name": "Updated Name"
+  }
+  ```
+
+### 4. `DELETE /api/DeleteUser/{id}`
+
+#### Request Format
+
+- **Method**: DELETE
+- **Endpoint**: `/api/DeleteUser/{id}`
+
+#### Response Format
+
+- **Status Codes**:
+  - `200 OK`: User deleted successfully.
+  - `400 Bad Request`: Invalid `id`.
+  - `404 Not Found`: User not found.
+
+- **Response Body (on success)**:
+  ```json
+  "User was successfully deleted :)"
+  ```
+
+## Sample API Usage
+
+### Example 1: Creating a User
+
+**Request**:
+```http
+POST /api/AddUser
+Content-Type: application/json
+
+{
+  "Name": "John Doe"
+}
+```
+
+**Response**:
+```json
+HTTP/1.1 201 Created
+
+{
+  "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+  "Name": "John Doe"
+}
+```
+
+### Example 2: Retrieving a User
+
+**Request**:
+```http
+GET /api/GetUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
+```
+
+**Response**:
+```json
+HTTP/1.1 200 OK
+
+{
+  "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+  "Name": "John Doe"
+}
+```
+
+### Example 3: Updating a User
+
+**Request**:
+```http
+PUT /api/EditUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
+Content-Type: application/json
+
+{
+  "Name": "Updated Name"
+}
+```
+
+**Response**:
+```json
+HTTP/1.1 200 OK
+
+{
+  "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+  "Name": "Updated Name"
+}
+```
+
+### Example 4: Deleting a User
+
+**Request**:
+```http
+DELETE /api/DeleteUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
+```
+
+**Response**:
+```json
+HTTP/1.1 200 OK
+
+"User was successfully deleted :)"
+```
+
+## Known Limitations and Assumptions
+
+- The API assumes that the `Name` provided in requests should consist only of alphabets, hyphens, and spaces.
 
 ### Setting up this api locally.
 
