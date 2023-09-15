@@ -1,3 +1,6 @@
+### HNGInternshipSecondTask
+
+
 # API Documentation
 
 **Live URL**: https://bahdman.bsite.net/
@@ -27,6 +30,7 @@
 - **Response Body (on success)**:
   ```json
   {
+    "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
     "Name": "John Doe"
   }
   ```
@@ -48,6 +52,7 @@
 - **Response Body (on success)**:
   ```json
   {
+    "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
     "Name": "John Doe"
   }
   ```
@@ -68,9 +73,17 @@
 #### Response Format
 
 - **Status Codes**:
-  - `204 No Content`: User updated successfully.
+  - `200 OK`: User updated successfully.
   - `400 Bad Request`: Invalid `id` or invalid input data.
   - `404 Not Found`: User not found.
+
+- **Response Body (on success)**:
+  ```json
+  {
+    "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+    "Name": "Updated Name"
+  }
+  ```
 
 ### 4. `DELETE /api/DeleteUser/{id}`
 
@@ -82,9 +95,14 @@
 #### Response Format
 
 - **Status Codes**:
-  - `204 No Content`: User deleted successfully.
+  - `200 OK`: User deleted successfully.
   - `400 Bad Request`: Invalid `id`.
   - `404 Not Found`: User not found.
+
+- **Response Body (on success)**:
+  ```json
+  "User was successfully deleted :)"
+  ```
 
 ## Sample API Usage
 
@@ -105,6 +123,7 @@ Content-Type: application/json
 HTTP/1.1 201 Created
 
 {
+  "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
   "Name": "John Doe"
 }
 ```
@@ -121,6 +140,7 @@ GET /api/GetUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
 HTTP/1.1 200 OK
 
 {
+  "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
   "Name": "John Doe"
 }
 ```
@@ -139,7 +159,12 @@ Content-Type: application/json
 
 **Response**:
 ```json
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
+
+{
+  "Id": "d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6",
+  "Name": "Updated Name"
+}
 ```
 
 ### Example 4: Deleting a User
@@ -151,14 +176,22 @@ DELETE /api/DeleteUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
 
 **Response**:
 ```json
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
+
+"User was successfully deleted :)"
 ```
 
 ## Known Limitations and Assumptions
 
 - The API assumes that the `Name` provided in requests should consist only of alphabets, hyphens, and spaces.
 
-## Setup and Deployment Instructions
+
+### Setting up this api locally.
+
+**Prerequisites**:
+
+1. Install [.NET Core SDK](https://dotnet.microsoft.com/download).
+2. Use a code editor like Visual Studio Code (VS Code).
 
 **Steps**:
 
