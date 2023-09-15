@@ -52,12 +52,12 @@ namespace src.Repositories{
             }
         }
 
-        public async Task<bool> Update(Guid id, UserViewModel viewModel)
+        public async Task<UserInfo> Update(Guid id, UserViewModel viewModel)
         {
             var userInstance = await View(id);
             if(userInstance == null)
             {
-                return false;
+                return null;
             }
 
             userInstance.Name = viewModel.Name;
@@ -65,11 +65,11 @@ namespace src.Repositories{
             try{
                  _context.UserInfos.Update(userInstance);
                  await _context.SaveChangesAsync();
-                 return true;
+                 return await View(id);
             }catch(Exception ex)
             {
                 Console.Write(ex.Message);
-                return false;
+                return null;
             }
         }
 

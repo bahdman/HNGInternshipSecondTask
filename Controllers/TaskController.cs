@@ -67,7 +67,7 @@ namespace src.Controllers{
                     return userInstance;
                 }
 
-                return NotFound();
+                return NotFound($"User with id: {id} was not found");
             }
 
             // Status code 400 (client error) => client failed to pass in id             
@@ -81,12 +81,12 @@ namespace src.Controllers{
             if(id != Guid.Empty && ModelState.IsValid)
             {
                 var isUpdated = await _service.Update(id, viewModel);
-                if(isUpdated)
+                if(isUpdated != null)
                 {
-                    return NoContent();
+                    return Ok(isUpdated);
                 }
 
-                return NotFound();
+                return NotFound($"Did not find user with id: {id} for update");
             }
 
             // Status code 400 (client error) => name failed to pass in id
@@ -102,10 +102,10 @@ namespace src.Controllers{
                 var isDeleted = await _service.Delete(id);
                 if(isDeleted)
                 {
-                    return NoContent();
+                    return Ok("User was succesfully deleted :)");
                 }
 
-                return NotFound();
+                return NotFound($"User with id: {id} was not found");
             }
 
             // Status code 400 (client error) => name failed to pass in id
