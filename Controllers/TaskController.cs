@@ -42,7 +42,7 @@ namespace src.Controllers{
                 var instance = await _service.Create(personItem.Name);
                 if(instance != null)
                 {
-                    return CreatedAtAction(nameof(GetUser), new{name = instance.Name}, instance);
+                    return CreatedAtAction(nameof(GetUser), new{id = instance.Id}, instance);
                 }
 
                 // If Person item not created (Db issue) return code => 500
