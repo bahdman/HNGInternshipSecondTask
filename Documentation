@@ -10,50 +10,53 @@
 - Database : Microsoft SQL Server
 
 **Base URL**:
-- The base URL for this API is typically `https://your-api-domain.com/api/`.
+- The base URL for this API is typically `https://bahdman.bsite.net/api/`.
+
+**Testing with Postman**
+**Request, response format and usage**
 
 **Endpoints**:
 1. **AddUser (HTTP POST)**:
-   - Endpoint: `/AddUser` e.g https://this/api/AddUser
+   - Endpoint: `/AddUser` e.g https://bahdman.bsite.net/api/AddUser
    - Method: POST
-   - Payload: Provide a JSON object in the request body with a "Name" property.
+   - Payload: Provide a JSON object in the request body with a "name" property.
    - Example:
      ```json
      {
-         "Name": "John Doe"
+         "name": "John Doe"
      }
      ```
 
 2. **GetUser (HTTP GET)**:
-   - Endpoint: `/GetUser/{id}` e.g e.g https://this/api/GetUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+   - Endpoint: `/GetUser/{id}` e.g e.g https://bahdman.bsite.net/api/GetUser/{id}
    - Method: GET
    - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to retrieve.
    - Example:
      ```
-     GET /api/task/GetUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+     https://bahdman.bsite.net/api/GetUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
      ```
 
 3. **EditUser (HTTP PUT)**:
-   - Endpoint: `/EditUser/{id}` e.g https://this/api/EditUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+   - Endpoint: `/EditUser/{id}` e.g https://bahdman.bsite.net/api/EditUser/{id}
    - Method: PUT
    - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to update.
    - Payload: Provide a JSON object in the request body with the fields you want to update.
    - Example:
      ```
-     PUT /api/task/EditUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+     https://bahdman.bsite.net/api/EditUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
      Request Body:
      {
-         "Name": "Updated Name"
+         "name": "Updated Name"
      }
      ```
 
 4. **DeleteUser (HTTP DELETE)**:
-   - Endpoint: `/DeleteUser/{id}` e.g https://this/api/DeleteUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+   - Endpoint: `/DeleteUser/{id}` e.g https://bahdman.bsite.net/api/DeleteUser/{id}
    - Method: DELETE
    - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to delete.
    - Example:
      ```
-     DELETE /api/task/DeleteUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+     https://bahdman.bsite.net/api/DeleteUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
      ```
 
 
