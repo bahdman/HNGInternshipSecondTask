@@ -1,0 +1,80 @@
+### HNGInternshipSecondTask
+
+### Project Task => build a simple REST API capable of CRUD operations on a "person" resource, interfacing with any database of your choice.
+
+**Introduction**:
+- The Task Controller API provides CRUD (Create, Read, Update, Delete) operations for managing user resources.
+
+**Tools**:
+- Programming Language : C#
+- Database : Microsoft SQL Server
+
+**Base URL**:
+- The base URL for this API is typically `https://your-api-domain.com/api/`.
+
+**Endpoints**:
+1. **AddUser (HTTP POST)**:
+   - Endpoint: `/AddUser` e.g https://this/api/AddUser
+   - Method: POST
+   - Payload: Provide a JSON object in the request body with a "Name" property.
+   - Example:
+     ```json
+     {
+         "Name": "John Doe"
+     }
+     ```
+
+2. **GetUser (HTTP GET)**:
+   - Endpoint: `/GetUser/{id}` e.g e.g https://this/api/GetUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+   - Method: GET
+   - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to retrieve.
+   - Example:
+     ```
+     GET /api/task/GetUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+     ```
+
+3. **EditUser (HTTP PUT)**:
+   - Endpoint: `/EditUser/{id}` e.g https://this/api/EditUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+   - Method: PUT
+   - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to update.
+   - Payload: Provide a JSON object in the request body with the fields you want to update.
+   - Example:
+     ```
+     PUT /api/task/EditUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+     Request Body:
+     {
+         "Name": "Updated Name"
+     }
+     ```
+
+4. **DeleteUser (HTTP DELETE)**:
+   - Endpoint: `/DeleteUser/{id}` e.g https://this/api/DeleteUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+   - Method: DELETE
+   - Path Parameter: Replace `{id}` with the unique identifier (GUID) of the user you want to delete.
+   - Example:
+     ```
+     DELETE /api/task/DeleteUser/6f8f9d1d-60ff-4a3e-89a6-12cb5b3d14b7
+     ```
+
+
+### Setting up this api locally.
+
+**Prerequisites**:
+
+1. Install [.NET Core SDK](https://dotnet.microsoft.com/download).
+2. Use a code editor like Visual Studio Code (VS Code).
+
+**Steps**:
+
+1. Clone this API project repository to your computer.
+
+2. Open a terminal/command prompt and navigate to your project's folder.
+
+3. Run he command `dotnet restore` to install project dependencies.
+
+4. Run the command `dotnet build` to build the API.
+
+5. Start the API with the command `dotnet run`. It will run on `localhost:5001` or `localhost:5000`.
+
+6. Test your API using a web browser or tools like Postman with the base URL (e.g., `http://localhost:5001/api`).
+
