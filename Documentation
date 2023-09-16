@@ -7,12 +7,12 @@
 
 ## Standard Formats for Requests and Responses
 
-### 1. `POST /api/AddUser`
+### 1. `POST /api`
 
 #### Request Format
 
 - **Method**: POST
-- **Endpoint**: `/api/AddUser`
+- **Endpoint**: `/api`
 - **Request Body**:
   ```json
   {
@@ -35,12 +35,12 @@
   }
   ```
 
-### 2. `GET /api/GetUser/{id}`
+### 2. `GET /api/{id}`
 
 #### Request Format
 
 - **Method**: GET
-- **Endpoint**: `/api/GetUser/{id}`
+- **Endpoint**: `/api/{id}`
 
 #### Response Format
 
@@ -57,12 +57,12 @@
   }
   ```
 
-### 3. `PUT /api/EditUser/{id}`
+### 3. `PUT /api/{id}`
 
 #### Request Format
 
 - **Method**: PUT
-- **Endpoint**: `/api/EditUser/{id}`
+- **Endpoint**: `/api/{id}`
 - **Request Body**:
   ```json
   {
@@ -85,12 +85,12 @@
   }
   ```
 
-### 4. `DELETE /api/DeleteUser/{id}`
+### 4. `DELETE /api/{id}`
 
 #### Request Format
 
 - **Method**: DELETE
-- **Endpoint**: `/api/DeleteUser/{id}`
+- **Endpoint**: `/api/{id}`
 
 #### Response Format
 
@@ -110,7 +110,7 @@
 
 **Request**:
 ```http
-POST /api/AddUser
+POST /api
 Content-Type: application/json
 
 {
@@ -132,7 +132,7 @@ HTTP/1.1 201 Created
 
 **Request**:
 ```http
-GET /api/GetUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
+GET /api/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
 ```
 
 **Response**:
@@ -149,7 +149,7 @@ HTTP/1.1 200 OK
 
 **Request**:
 ```http
-PUT /api/EditUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
+PUT /api/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
 Content-Type: application/json
 
 {
@@ -171,7 +171,7 @@ HTTP/1.1 200 OK
 
 **Request**:
 ```http
-DELETE /api/DeleteUser/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
+DELETE /api/d8f0013f-2aa9-4a1a-8d49-8559d3f8d2a6
 ```
 
 **Response**:
