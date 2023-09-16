@@ -6,7 +6,7 @@ using src.ViewModels;
 
 namespace src.Controllers{
     [ApiController]
-    [Route("api/[action]")]
+    [Route("api/")]
     public class TaskController : ControllerBase{
 
         private readonly IUser _service;
